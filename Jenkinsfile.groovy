@@ -12,14 +12,8 @@ pipeline {
   // }
 
   environment {
-    ste = [
-      'steccm01',
-      'steccm02'
-    ]
-    dev = [
-      'devccm01',
-      'devccm02'
-    ]
+    ste = 'steccm01'
+    dev = 'devccm01'
   }
 
   parameters {
