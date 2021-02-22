@@ -20,9 +20,9 @@ pipeline {
     choice(name: 'CHOICE', choices: ['ste', 'dev'], description: 'select an options')
   }
 
-  parameters {
-    string(name: 'JENKINS_ANSIBLE_HOST_LIMIT', defaultValue: '', description: 'user choice')
-  }
+  // parameters {
+  //   string(name: 'JENKINS_ANSIBLE_HOST_LIMIT', defaultValue: '', description: 'user choice')
+  // }
 
   stages {
 
@@ -39,11 +39,11 @@ pipeline {
         script {
 
           if('${params.CHOICE}' == 'ste') {
-            ansiblePlaybook inventory: '', tags: 'diskspace_and_delete_files', limit: '${params.JENKINS_ANSIBLE_HOST_LIMIT}', playbook: 'site.yml', sudo: true, sudoUser: 'jenkins'
+            ansiblePlaybook inventory: '', tags: 'diskspace_and_delete_files', playbook: 'site.yml', sudo: true, sudoUser: 'jenkins'
           }
 
           if('${params.CHOICE}' == 'dev') {
-            ansiblePlaybook inventory: '', tags: 'diskspace_and_delete_files', limit: '${params.JENKINS_ANSIBLE_HOST_LIMIT}', playbook: 'site.yml', sudo: true, sudoUser: 'jenkins'
+            ansiblePlaybook inventory: '', tags: 'diskspace_and_delete_files', playbook: 'site.yml', sudo: true, sudoUser: 'jenkins'
           }
         }
       }
