@@ -1,0 +1,6 @@
+---
+- hosts: localhost
+  become: true
+
+  roles:
+  - { role: diskspace_and_delete_files, tags: diskspace_and_delete_files }

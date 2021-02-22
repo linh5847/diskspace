@@ -1,0 +1,6 @@
+---
+# tasks file for diskspace_and_delete_files
+
+- name: Calling check_diskspace_and_cleanup.yml file.
+  include_tasks: check_diskspace_and_cleanup.yml
+  when: ansible_os_family == 'RedHat'

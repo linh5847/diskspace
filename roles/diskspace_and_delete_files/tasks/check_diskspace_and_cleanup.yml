@@ -1,0 +1,7 @@
+---
+- name: clean up old files, when disk space is below 20%
+  command: find /mnt/database -name "messages-*" -type f -mtime +1 -exec rm -rf {} \;
+  become: true
+  delegate_facts: true
+  when: "item.mount == '/mnt/database' and ( item.size_available < item.size_total * 0.2 )"
+  with_items: '{{ ansible_mounts }}'
