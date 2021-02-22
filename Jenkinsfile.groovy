@@ -12,25 +12,22 @@ pipeline {
   // }
 
   environment {
-    azure {
+    ste = [
+      'steccm01',
+      'steccm02'
+    ]
+    dev = [
+      'devccm01',
+      'devccm02'
+    ]
+  }
 
-      teamStacks = [
-        [
-          name: 'ccm',
-          stacks: [
-            [ name: 'steccm01'],
-            [ name: 'steccm02']
-          ],
-          [
-            name: 'bulk-scan',
-            stacks: [
-              [ name: 'devscan01'],
-              [ name: 'devscan02']
-            ]
-          ]
-        ]
-      ]
-    }
+  parameters {
+    choice(name: 'CHOICE', choices: ['ste', 'dev'], description: 'select an options')
+  }
+
+  parameters {
+    string(name: 'JENKINS_ANSIBLE_HOST_LIMIT', defaultVault: '', description: 'enter details')
   }
 
   stages {
@@ -39,6 +36,21 @@ pipeline {
       steps {
         script {
           git url: 'git@github.com:linh5847/diskspace.git'
+        }
+      }
+    }
+
+    stage('Checking diskspace and cleanup files that are 1 day or olders.') {
+      steps {
+        script {
+
+          if('${params.CHOICE}' == 'ste') {
+            ansiblePlaybook inventory: '', tags: 'diskspace_and_delete_files', limit: '${JENKINS_ANSIBLE_HOST_LIMIT}', playbook: 'site.yml', sudo: true, sudoUser: 'jenkins'
+          }
+
+          if('${params.CHOICE}' == 'dev') {
+            ansiblePlaybook inventory: '', tags: 'diskspace_and_delete_files', limit: '${JENKINS_ANSIBLE_HOST_LIMIT}', playbook: 'site.yml', sudo: true, sudoUser: 'jenkins'
+          }
         }
       }
     }
