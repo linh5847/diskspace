@@ -33,5 +33,14 @@ pipeline {
     }
   }
 
-   
+  stages {
+
+    stage('Checkout git repo') {
+      steps {
+        script {
+          git url: 'git@github.com:linh5847/diskspace.git'
+        }
+      }
+    }
+  }
 }
