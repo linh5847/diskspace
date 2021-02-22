@@ -16,14 +16,14 @@ pipeline {
 
       teamStacks = [
         [
-          name: 'ccm'
+          name: 'ccm',
           stacks: [
             [ name: 'steccm01'],
             [ name: 'steccm02']
           ]
         ],
         [
-          name: 'bulk-scan'
+          name: 'bulk-scan',
           stacks: [
             [ name: 'devscan01'],
             [ name: 'devscan02']
