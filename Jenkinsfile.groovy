@@ -21,7 +21,7 @@ pipeline {
   }
 
   parameters {
-    string(name: 'JENKINS_ANSIBLE_HOST_LIMIT', defaultVault: '', description: 'enter details')
+    string(name: 'JENKINS_ANSIBLE_HOST_LIMIT', defaultValue: '', description: 'enter details')
   }
 
   stages {
