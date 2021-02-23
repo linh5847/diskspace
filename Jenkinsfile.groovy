@@ -20,7 +20,7 @@ pipeline {
     stage('Checking diskspace and cleanup files that are 1 day or olders.') {
       steps {
         script {
-          ansiblePlaybook colorized: true, inventory: 'inventory.ini' playbook: 'site.yml'
+          ansiblePlaybook colorized: true, inventory: 'inventory.ini', playbook: 'site.yml'
         }
       }
     }
